@@ -5,9 +5,6 @@
 A Laravel Nova field that secure save your files into an array of objects and download from response
 
 <p align="center">
-  <img src="img/SecureArrayFiles_Edit.png" alt="SecureArrayFiles_Edit.png"/>
-</p>
-<p align="center">
   <img src="img/SecureArrayFiles_Details.png" alt="SecureArrayFiles_Details.png"/>
 </p>
 
@@ -35,6 +32,11 @@ public function fields(Request $request)
 ...
 ```
 That will create a field with name `My files`. Stored data will look like this.
+
+<p align="center">
+  <img src="img/SecureArrayFiles_Edit.png" alt="SecureArrayFiles_Edit.png"/>
+</p>
+
 ```
 [{
     "originalName":"favicon-32x32.png",
