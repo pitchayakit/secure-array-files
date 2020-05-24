@@ -1,0 +1,38 @@
+{
+    "name": "movex-ukraine/secure-array-files",
+    "description": "A Laravel Nova field that secure save your files into an array of objects and download from response",
+    "keywords": [
+        "laravel",
+        "nova",
+        "secure",
+        "array",
+        "files"
+    ],
+    "authors": [
+        {
+            "name": "Movex Ltd",
+            "email": "dev@movex.co"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MovexUkraine\\SecureArrayFiles\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MovexUkraine\\SecureArrayFiles\\FieldServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
