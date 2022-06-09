@@ -520,6 +520,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -547,21 +548,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.hidden = "";
             var app = this;
             var fd = new FormData();
-            fd.append('file', event.target.files[0], event.target.files[0].name);
-            fd.append('disk', this.field.disk);
-            fd.append('path', this.field.path);
 
-            axios.post('/nova-vendor/secure-array-files/upload', fd).then(function (res) {
-                app.files.push(res.data);
-                app.value = JSON.stringify(app.files);
-                _this.hidden = "hidden";
-            });
+            for (var i = 0; i < event.target.files.length; i++) {
+                fd.append('file', event.target.files[i], event.target.files[i].name);
+                fd.append('disk', this.field.disk);
+                fd.append('path', this.field.path);
+
+                axios.post('/nova-vendor/secure-array-files/upload', fd).then(function (res) {
+                    app.files.push(res.data);
+                    app.value = JSON.stringify(app.files);
+                    _this.hidden = "hidden";
+                });
+            }
         },
         deleteImage: function deleteImage(index) {
-            axios.delete('/nova-vendor/secure-array-files/delete/' + this.files[index].name);
+            axios.delete('/nova-vendor/secure-array-files/delete/', {
+                data: {
+                    path: this.files[index].name
+                }
+            });
             this.files.splice(index, 1);
             this.value = JSON.stringify(this.files);
         },
+
 
         /*
          * Set the initial, internal value for the field.
@@ -26961,7 +26970,7 @@ var render = function() {
         _c("input", {
           ref: "add_file",
           staticClass: "hidden",
-          attrs: { type: "file" },
+          attrs: { type: "file", multiple: "" },
           on: { change: _vm.fileSelected }
         }),
         _vm._v(" "),
@@ -26969,7 +26978,7 @@ var render = function() {
           "button",
           {
             staticClass:
-              "bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded",
+              "px-4 py-2 font-bold text-white rounded bg-primary hover:bg-primary-dark",
             attrs: { type: "button" },
             on: {
               click: function($event) {
@@ -27021,7 +27030,7 @@ var render = function() {
                     "a",
                     {
                       staticClass:
-                        "text-danger hover:font-bold no-underline mb-2",
+                        "mb-2 no-underline text-danger hover:font-bold",
                       attrs: { href: "#" },
                       on: {
                         click: function($event) {

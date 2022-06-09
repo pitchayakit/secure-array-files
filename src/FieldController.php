@@ -19,7 +19,7 @@ class FieldController extends Controller
         $path = $request->path ? $request->path : '/';
 
         $file = Storage::disk($disk)->putFileAs(
-            $path, $request->file('file'), (new \DateTime('now'))->format('Y-m-d') . '_' . ($request->file('file'))->hashName()
+            $path, $request->file('file'), (new \DateTime('now'))->format('Y-m-d') . '/' . ($request->file('file'))->hashName()
         );
 
         return [
@@ -36,9 +36,9 @@ class FieldController extends Controller
         return response()->file($pathToFile);
     }
 
-    public function delete($file)
+    public function delete(Request $request)
     {
-        Storage::delete($file);
+        Storage::disk('public')->delete($request->path);
 
         return "Success delete file!";
     }
