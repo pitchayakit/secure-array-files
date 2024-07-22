@@ -1,5 +1,5 @@
 <template>
-    <default-field :field="field" :errors="errors">
+    <default-field :field="field" :errors="errors" :full-width-content="true">
         <template slot="field">
             <input
                 :id="field.name"
@@ -25,21 +25,31 @@
             <p v-if="hasError" class="my-2 text-danger">
                 {{ firstError }}
             </p>
-            <div class="flex flex-col pt-8 text-center">
-                <div v-for="(file, index) in files" class="w-1/2 p-2 mb-4 rounded shadow-lg" style="-ms-word-wrap: break-word;word-wrap: break-word;">
-                    <p><a :href="file.url" target="_blank">{{ file.originalName }}</a></p>
-                    <br>
-                    <p>
-                        <a href="#" @click.prevent="deleteImage(index)" class="mb-2 no-underline text-danger hover:font-bold">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line x1="14" y1="11" x2="14" y2="17"></line>
-                            </svg>
-                            {{ __('delete') }}
-                        </a>
-                    </p>
+            <div class="flex flex-wrap pt-8">
+                <div v-for="(file, index) in files" :key="index" class="p-2">
+                    <div class="p-4 mb-4 bg-white border rounded shadow-lg">
+                        <div class="pb-2">
+                            <p class="font-semibold">File name</p>
+                            <p class="pb-2"><a :href="file.url" target="_blank" class="text-blue-500 hover:underline">{{ file.originalName }}</a></p>
+                        </div>
+                        
+                        <div class="pb-2">
+                            <p class="font-semibold">Uploaded at</p>
+                            <p>{{ file.uploaded_at }}</p>
+                        </div>
+
+                        <p>
+                            <a href="#" @click.prevent="deleteImage(index)" class="inline-flex items-center text-danger hover:font-bold">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1 feather feather-trash-2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                </svg>
+                                {{ __('delete') }}
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </template>

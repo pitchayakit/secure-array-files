@@ -26,6 +26,7 @@ class FieldController extends Controller
             'originalName' => $request->file('file')->getClientOriginalName(),
             'name' => $file,
             'url' => Storage::url($file),
+            'uploaded_at' => (new \DateTime('now'))->format('d-m-Y H:i:s')
         ];
     }
 
