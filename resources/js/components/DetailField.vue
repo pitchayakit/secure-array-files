@@ -2,7 +2,7 @@
     <panel-item :field="field">
         <div slot="value" class="flex flex-wrap">
             <div v-for="file in JSON.parse(field.value)" :key="file.url" class="p-2">
-                <a :href="file.url" class="inline-flex items-center font-semibold text-gray-800 bg-gray-300 rounded hover:bg-gray-400"
+                <a :href="file.url" class="inline-flex items-center font-semibold text-gray-800 no-underline bg-gray-300 rounded hover:bg-gray-400"
                     target="_blank"
                 >
                     
@@ -18,7 +18,7 @@
                             <p class="pb-2"><a :href="file.url" target="_blank" class="text-blue-500 hover:underline">{{ file.originalName }}</a></p>
                         </div>
                         
-                        <div class="pb-2">
+                        <div class="pb-2 text-gray">
                             <p class="font-semibold">Uploaded at</p>
                             <p>{{ file.uploaded_at }}</p>
                         </div>
@@ -28,6 +28,12 @@
         </div>
     </panel-item>
 </template>
+
+<style scoped>
+.text-gray {
+    color: #718096;
+}
+</style>
 
 <script>
 export default {
